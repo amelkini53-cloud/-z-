@@ -56,3 +56,18 @@ The launcher stores the link on the device. When you edit the same Dropbox file 
 - Connect account/profile and news APIs.
 
 The launcher does not bundle a game client or third-party game assets. Distribute only clients and assets you are authorized to use.
+
+## SA-MP VIP and Payday starter
+
+A standalone Pawn starter gamemode is available at `gamemodes/vortex_vip_payday.pwn`.
+
+- Payday runs every 60 minutes for connected players and grants $1,000 in-game salary.
+- VIP lasts 30 days.
+- Bronze VIP costs 500 VC and grants 2 VC per Payday.
+- Silver VIP costs 1,200 VC and grants 5 VC per Payday.
+- Gold VIP costs 2,500 VC and grants 10 VC per Payday.
+- `/vip` opens the VIP shop; `/vc` shows the VC balance.
+- RCON admins can use `/vcgive [playerid] [amount]` to grant test VC.
+- Player VC and VIP expiry are stored in the built-in SQLite database `scriptfiles/vortex_vip.db`.
+
+This is a standalone starter gamemode, not yet merged into a larger RP gamemode. Compile it with the SA-MP server's Pawn compiler and test it on a private server before use. It has not been compiled or runtime-tested in this repository. The admin VC command is for server testing; a secure player-facing VC top-up system would need a separate verified backend and must never trust a balance supplied by the client.
