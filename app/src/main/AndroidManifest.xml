@@ -1,0 +1,20 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <queries>
+        <!-- Replace with the package name of the compatible CRMP client. -->
+        <package android:name="com.vortexrp.crmp" />
+    </queries>
+    <application
+        android:allowBackup="false"
+        android:label="Vortex Role Play"
+        android:theme="@android:style/Theme.Material.Light.NoActionBar"
+        android:supportsRtl="true">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
