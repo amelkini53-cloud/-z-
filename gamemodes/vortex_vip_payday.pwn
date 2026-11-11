@@ -86,6 +86,16 @@ stock LoadVortexAccount(playerid)
     return 1;
 }
 
+stock GetNextToken(const source[], &index, destination[], destinationSize)
+{
+    while (source[index] == ' ') index++;
+    new length;
+    while (source[index] != EOS && source[index] != ' ' && length < destinationSize - 1)
+        destination[length++] = source[index++];
+    destination[length] = EOS;
+    return length;
+}
+
 stock GetVIPPrice(level)
 {
     switch (level)
@@ -211,6 +221,36 @@ public OnPlayerCommandText(playerid, cmdtext[])
         new message[96];
         format(message, sizeof message, "[VORTEX] Твой баланс: %d VC.", gPlayerVC[playerid]);
         SendClientMessage(playerid, 0xA78BFAFF, message);
+        return 1;
+    }
+
+    if (!strcmp(cmdtext, "/vcgive", true, 7) && cmdtext[7] == ' ')
+    {
+        if (!IsPlayerAdmin(playerid))
+        {
+            SendClientMessage(playerid, 0xFF7777FF, "[VORTEX] Команда доступна только RCON-администрации.");
+            return 1;
+        }
+
+        new index = 8, targetText[12], amountText[16];
+        GetNextToken(cmdtext, index, targetText, sizeof targetText);
+        GetNextToken(cmdtext, index, amountText, sizeof amountText);
+
+        new targetid = strval(targetText);
+        new amount = strval(amountText);
+        if (targetText[0] == EOS || amountText[0] == EOS || !IsPlayerConnected(targetid) || amount <= 0 || amount > 1000000)
+        {
+            SendClientMessage(playerid, 0xFF7777FF, "Использование: /vcgive [playerid] [количество 1-1000000]");
+            return 1;
+        }
+
+        gPlayerVC[targetid] += amount;
+        SaveVortexAccount(targetid);
+
+        new message[112];
+        format(message, sizeof message, "[VORTEX] Администратор начислил тебе %d VC. Баланс: %d VC.", amount, gPlayerVC[targetid]);
+        SendClientMessage(targetid, 0xA78BFAFF, message);
+        SendClientMessage(playerid, 0xA78BFAFF, "[VORTEX] VC успешно начислены.");
         return 1;
     }
 
