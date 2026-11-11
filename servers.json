@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "servers": [
+    {
+      "id": "main",
+      "name": "Vortex Role Play",
+      "host": "CHANGE_ME_SERVER_IP",
+      "port": 7777,
+      "version": "0.1.0",
+      "players": null
+    }
+  ]
+}
