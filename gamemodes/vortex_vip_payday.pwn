@@ -238,7 +238,7 @@ public OnPlayerCommandText(playerid, cmdtext[])
 
         new targetid = strval(targetText);
         new amount = strval(amountText);
-        if (targetText[0] == EOS || amountText[0] == EOS || !IsPlayerConnected(targetid) || amount <= 0 || amount > 1000000)
+        if (targetText[0] == EOS || amountText[0] == EOS || targetid < 0 || targetid >= MAX_PLAYERS || !IsPlayerConnected(targetid) || amount <= 0 || amount > 1000000)
         {
             SendClientMessage(playerid, 0xFF7777FF, "Использование: /vcgive [playerid] [количество 1-1000000]");
             return 1;
